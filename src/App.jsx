@@ -6,6 +6,9 @@ import axios from 'axios';
 import List from './List';
 import NewListForm from './NewListForm';
 
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -55,12 +58,8 @@ class App extends Component {
       })
     })
   }
-
-
   handleNewListSubmit(e) {
     e.preventDefault();
-    console.log('submission!', this.state.newListFormValue)
-
     this.postNewList()
   }
   handleNewListChange(event) {
@@ -84,7 +83,7 @@ class App extends Component {
         </header>
         <div className="list-container">
           {
-            this.state.lists.map(list => <List {...list} key={list.id} handleDelete={() => this.handleDeleteList(list.id)}/>)
+            this.state.lists.map(list => <List {...list} key={list.id} handleDelete={() => this.handleDeleteList(list.id)} />)
           }
         </div>
         <NewListForm handleSubmit={this.handleNewListSubmit} handleChange={this.handleNewListChange} value={this.state.newListFormValue}/>
@@ -93,4 +92,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default DragDropContext(HTML5Backend)(App);
