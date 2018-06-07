@@ -3,7 +3,6 @@ import { DragSource } from 'react-dnd';
 
 const taskSource = {
   beginDrag(props, monitor) {
-    console.log('drag props', props)
     return {id: props.id, value: props.value, moveTask: props.moveTask};
   }
 };

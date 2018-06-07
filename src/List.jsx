@@ -9,9 +9,6 @@ const listTarget = {
     let taskItem = monitor.getItem();
     let task = {value: taskItem.value, id: taskItem.id}
 
-    // console.log('dropTarget listProps', listProps)
-    // console.log('dropTarget component', component)
-
     // TODO REVISIT THIS
     taskItem.moveTask(listProps.id, task, component)
   }
@@ -40,11 +37,6 @@ class List extends Component {
 
   }
   moveTask(list_id, task, component) {
-    // console.log('list_id', list_id)
-    // console.log('task', task)
-
-    // console.log('this', this)
-
     axios.post(`https://trello-clone-bfbb5.firebaseio.com/lists/${list_id}/tasks.json`, {value: task.value})
       .then(res => {
         return axios.delete(`https://trello-clone-bfbb5.firebaseio.com/lists/${this.props.id}/tasks/${task.id}.json`)
